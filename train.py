@@ -44,3 +44,6 @@ for epoch in range(10):
     loss.backward()
     optimizer.step()
     print(f"Epoch {epoch+1}, Loss: {loss.item():.4f}")
+
+# Save model after training
+torch.save(model.state_dict(), "fraud_model.pth")
