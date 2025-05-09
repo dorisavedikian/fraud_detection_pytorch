@@ -33,3 +33,13 @@ class_weights = compute_class_weight('balanced', classes=[0, 1], y=df['Class'])
 ```
 
 Use the features as inputs to your neural net, and `Class` as the label.
+
+---
+
+## 📥 Dataset Download
+
+This project uses the [Credit Card Fraud Detection dataset](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud) from Kaggle.
+
+Please download `creditcard.csv` manually and place it in the project root directory.
+
+The dataset exceeds GitHub's file size limits and is not stored in this repository.
