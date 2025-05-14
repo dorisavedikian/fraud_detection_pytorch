@@ -16,17 +16,40 @@ Modules used:
 st.title("💳 Fraud Detection Demo")
 
 st.markdown("""
-This demo allows you to simulate a credit card transaction and predict whether it might be fraudulent.
+This demo allows you to simulate a credit card transaction using 10 features and predict whether it might be fraudulent.
 """)
 
-# User inputs for 20 features (as in the synthetic data or Kaggle dataset)
+st.markdown("""
+Each of the 10 features below is represented as a slider ranging from -5.0 to 5.0.
+
+Why this range? During training, all input features were standardized using **z-score normalization** (via `StandardScaler`), which transforms data to have:
+- A **mean of 0**
+- A **standard deviation of 1**
+
+This means most real-world values fall between **-3 and 3** after scaling. The wider **-5 to 5** range lets you experiment with edge cases or extreme transaction behaviors while keeping inputs consistent with what the model was trained on.
+""")
+
+# Use real-like feature names (10 only)
+FEATURE_NAMES = [
+    "Transaction Amount",
+    "Transaction Time",
+    "Cardholder Age",
+    "Merchant Category",
+    "Card Type",
+    "Account Tenure",
+    "Transaction Frequency",
+    "Geo Distance",
+    "Device Score",
+    "Historical Fraud Rate"
+]
+
 inputs = []
-for i in range(20):
-    val = st.slider(f"Feature {i+1}", -5.0, 5.0, 0.0, step=0.1)
+for name in FEATURE_NAMES:
+    val = st.slider(f"{name}", -5.0, 5.0, 0.0, step=0.1)
     inputs.append(val)
 
-# Load model (make sure model is saved as fraud_model.pth)
-model = FraudDetector(input_dim=20)
+# Load model (still trained on 20 features, so we need to adapt model or retrain with 10)
+model = FraudDetector(input_dim=10)
 model.load_state_dict(torch.load("fraud_model.pth", map_location=torch.device('cpu')))
 model.eval()
 

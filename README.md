@@ -81,7 +81,7 @@ The `train.py` script generates synthetic binary classification data designed to
 
 The generated data includes:
 
-- 🧮 **1,000 samples** with **20 numerical features** per sample  
+- 🧮 **1,000 samples** with **10 features** per sample  
 - 🎯 A **binary target variable** (`y`) where `0` = legitimate, `1` = fraudulent  
 - ⚖️ A **class weight distribution** of `[0.95, 0.05]` to simulate imbalance  
 - 🧼 **Standardized features** using `StandardScaler` for stable neural network training  
