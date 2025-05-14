@@ -3,6 +3,16 @@ import torch
 import numpy as np
 from train import FraudDetector  # assumes model definition is in train.py
 
+"""
+This Streamlit web application allows users to input transaction data and predicts whether
+the transaction is fraudulent using a pre-trained PyTorch model.
+
+Modules used:
+- streamlit: Web app UI
+- torch: Model loading and inference
+- numpy: Numerical input processing
+"""
+
 st.title("💳 Fraud Detection Demo")
 
 st.markdown("""

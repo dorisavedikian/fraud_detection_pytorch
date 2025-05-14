@@ -38,23 +38,6 @@ This project uses the [Credit Card Fraud Detection dataset from Kaggle](https://
 
 2. Place `creditcard.csv` into your project root directory (same folder as `train.py`)
 
-3. Optional: Preprocess and scale:
-```python
-import pandas as pd
-from sklearn.preprocessing import StandardScaler
-
-df = pd.read_csv('creditcard.csv')
-scaler = StandardScaler()
-df['Amount'] = scaler.fit_transform(df[['Amount']])
-df['Time'] = scaler.fit_transform(df[['Time']])
-```
-
-4. Optional: Handle class imbalance with weights:
-```python
-from sklearn.utils.class_weight import compute_class_weight
-class_weights = compute_class_weight('balanced', classes=[0, 1], y=df['Class'])
-```
-
 ---
 
 ## ⚙️ Setup Instructions
@@ -92,6 +75,21 @@ torch.save(model.state_dict(), "fraud_model.pth")
 
 ---
 
+## 🧾 Synthetic Data Overview
+
+This script generates synthetic binary classification data designed to simulate real-world fraud detection scenarios, where the dataset is highly imbalanced—i.e., one class (non-fraudulent transactions) significantly outnumbers the other (fraudulent transactions). Using `sklearn.datasets.make_classification`, it creates a dataset with two classes and a strong class imbalance (e.g., 95% legitimate, 5% fraudulent). This reflects the typical challenges in fraud detection, where the minority class is the most critical to detect but also the hardest to model due to limited examples.
+
+The generated data includes:
+
+- 🧮 **1,000 samples** with **20 numerical features** per sample  
+- 🎯 A **binary target variable** (`y`) where `0` = legitimate, `1` = fraudulent  
+- ⚖️ A **class weight distribution** of `[0.95, 0.05]` to simulate imbalance  
+- 🧼 **Standardized features** using `StandardScaler` for stable neural network training  
+
+The model is then trained on this data using a simple feedforward neural network built with PyTorch, and the trained model is saved for later inference.
+
+---
+
 ## 📊 Evaluation
 
 After training, evaluate the model using:
@@ -116,23 +114,8 @@ python -m streamlit run fraud_app.py
 
 ---
 
-## ❗ Common Issues
-
-- `ModuleNotFoundError`: Run `pip install -r requirements.txt`
-- `FileNotFoundError: fraud_model.pth`: You need to run `train.py` first
-- Port conflict on 8501: Use `streamlit run fraud_app.py --server.port 8502`
-
----
-
 ## 👤 Author
 
 Doris Avedikian  
 GitHub: [@dorisavedikian](https://github.com/dorisavedikian)
 
----
-
-## 🧠 Future Improvements
-
-- Add SHAP for model interpretability
-- Deploy Streamlit to Hugging Face Spaces or Render
-- Use time-based sequences or LSTM for temporal fraud patterns
