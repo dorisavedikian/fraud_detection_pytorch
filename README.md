@@ -77,7 +77,7 @@ torch.save(model.state_dict(), "fraud_model.pth")
 
 ## 🧾 Synthetic Data Overview
 
-This script generates synthetic binary classification data designed to simulate real-world fraud detection scenarios, where the dataset is highly imbalanced—i.e., one class (non-fraudulent transactions) significantly outnumbers the other (fraudulent transactions). Using `sklearn.datasets.make_classification`, it creates a dataset with two classes and a strong class imbalance (e.g., 95% legitimate, 5% fraudulent). This reflects the typical challenges in fraud detection, where the minority class is the most critical to detect but also the hardest to model due to limited examples.
+The `train.py` script generates synthetic binary classification data designed to simulate real-world fraud detection scenarios, where the dataset is highly imbalanced—i.e., one class (non-fraudulent transactions) significantly outnumbers the other (fraudulent transactions). Using `sklearn.datasets.make_classification`, it creates a dataset with two classes and a strong class imbalance (e.g., 95% legitimate, 5% fraudulent). This reflects the typical challenges in fraud detection, where the minority class is the most critical to detect but also the hardest to model due to limited examples.
 
 The generated data includes:
 
@@ -97,7 +97,9 @@ After training, evaluate the model using:
 - Confusion Matrix
 - Precision, Recall, F1-Score
 
-See `EVALUATION.md` for full examples.
+```bash
+python evaluate.py
+```
 
 ---
 
